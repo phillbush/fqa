@@ -2,7 +2,7 @@
 
 # set constants and call the parser
 BEGIN {
-	if (type == "")
+	if (!type)
 		type = "roff"
 
 	if (type == "html")
@@ -149,6 +149,8 @@ BEGIN {
 	markup["html", "LINK", "END"] = "</a>"
 	markup["html", "BREAK", "MID"] = "<br/>"
 
+	if (troff)
+		inittroff()
 	document()
 }
 
@@ -157,6 +159,15 @@ function err(str) {
 	printf "incipit: %s\n", str >"/dev/stderr"
 	error = 1
 	exit error
+}
+
+# initiate number records and fonts for troff
+function inittroff() {
+	print ".fp 1 R LucidaSans"
+	print ".fp 2 I LucidaSansI"
+	print ".fp 3 B LucidaSansB"
+	print ".fp 4 BI LucidaSansI"
+	print ".fp 5 CW LucidaCW"
 }
 
 # unget token

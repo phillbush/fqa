@@ -10,7 +10,7 @@ fqa.pdf:D: fqa.ps
 	ps2pdf fqa.ps fqa.pdf
 
 fqa.ps:D: $ROFFS
-	troff -ms -mpictures mb.tmac $ROFFS | dpost >fqa.ps
+	troff -mpictures mb.tmac $ROFFS | dpost >fqa.ps
 
 %.roff:D: %.txt
 	awk -f ./incipit $stem.txt >$target

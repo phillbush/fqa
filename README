@@ -1,0 +1,48 @@
+                                  FQA
+
+(0) What is this?
+This is a rewriting of the 9front FQA into a markdown-like txt format.
+This repository also contains an awk script that converts this txt file
+to both html and roff using a macro package I created.  This repository
+also contains the macro package in which the automatically generated
+roff code is written in.
+
+(1) Why rewrite 9front FQA?
+Because the official FQA troff formatting sucks.
+
+(2) Why the official FQA troff formatting sucks:
+• It combines html markup with troff commands.
+• It uses two different markups for some text elements.  For example,
+  there's a `.html ul <ul>` and a `.QS` to markup blocks of quotation.
+  Two markup commands for the same element!
+• It repeats itself constantly.  Common patterns should be abstracted
+  out into macros.
+• It uses `.SH` (non-numbered section headings) rather than `.NH`
+  (numbered section headings).  But the author puts numbers before the
+  headings!  The ms macro package has a macro that automatically number
+  stuff, but the author manually numbers them!
+• It does not use the `.PP` macro to break paragraphs, but blank lines.
+
+(3) Where are the funny pics?
+I still have to download them. For now, I'm concentrating on the
+formatting of the macro package and on the script.
+
+(4) Why a new macro package? Why not -ms?
+ms is nice, but it lacks list macros and its footnote macros do not
+number footnotes automatically.  I also had to write a macro for
+chapters.  So instead of expanding ms, I created my own troff macro
+package, which took almost the same effort.
+
+(5) Why?
+This is just an experiment on troff.  I wanted to format a book in troff
+and I wanted to test my txt->troff/html conversion script.  So 9front's
+fqa was my victim for those tests.  
+
+(6) Where is the index? Where are the other chapters?
+I still have to work on a index awk script.  I'm still rewriting the
+other chapters.
+
+(7) Does this work on groff/gawk?
+I tested the script on OpenBSD awk(1) and 9front awk(1).  The troff file
+was processed using Heirloom troff on OpenBSD and 9front troff on 9front.
+I have no idea whether that works on GNU stuff.

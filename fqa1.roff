@@ -1,0 +1,492 @@
+.CH "Introduction to 9front"
+.FS
+.PP
+.BP "img/9frontsystem.eps"
+.FE
+.SH 1 "What is 9front?"
+.PP
+Plan9front (or 9front) is a fork of the
+Plan 9 from Bell Labs\c
+.NS
+https://9p\&.io/plan9/
+.NE
+operating system\&.
+The project was started to remedy a perceived lack of devoted
+development resources inside Bell Labs, and has accumulated various
+fixes\c
+.NS
+http://git\&.9front\&.org/plan9front/plan9front/HEAD/info\&.html
+.NE
+and
+improvements\&.\c
+.NS
+fqa1\&.html#1\&.3\&.1
+.NE
+.PP
+This FQA specifically covers only the most recent release of 9front\&.
+.SH 2 "Cirno"
+.FS
+.PP
+.BP "img/cirno.eps"
+.FE
+.PP
+At some point, Cirno\c
+.NS
+http://touhou\&.wikia\&.com/wiki/Cirno
+.NE
+became
+associated with 9front\&. Details are sketchy, but this image has been in
+the wiki since the Google Code days, so I'm leaving it in\&.
+.PP "Pro\&."
+.LS
+.LI
+girl
+.LI
+has magical powers
+.LI
+associated with 9
+.LI
+upsets kfx
+.LI
+she is known to be the strongest
+.LE
+.PP "Alternatives\&."
+.FS
+.PP
+.BP "img/tuttleglenda.eps"
+.FE
+.FS
+.PP
+.BP "img/grumpycatno.eps"
+.FE
+.SH 1 "On what systems does 9front run?"
+.PP
+9front runs on the following platforms:
+• 386
+• amd64
+• arm
+• arm64
+• mips
+.PP
+Read:
+\fIFQA 3\&.2 \(hy Selecting Hardware\fP\c
+.NS
+fqa3\&.html#3\&.2
+.NE
+.SH 1 "Why might I want to use 9front?"
+.PP
+It is very likely that you do not\&.
+.PP
+New users frequently want to know whether 9front is superior to some
+other free UNIX\(hylike operating system\&. Consider: The question is largely
+unanswerable\&. What are your criteria? Why are you even using computers
+in the first place? Exploring these questions and the implications that
+derive therefrom may help you sharpen your perceptions and eventually
+come to some sort of conclusion about which operating system you prefer
+to use for daily tasks\&.
+.PP
+Ultimately, whether or not 9front is for you is a question only you can
+answer\&.
+.PP
+Note: The above text is lightly plagiarized from the
+OpenBSD FAQ\&.\c
+.NS
+http://www\&.openbsd\&.org/faq/
+.NE
+.SH 2 "Why might I not want to use 9front?"
+.PP
+Hold up\&. Before you get too excited, consider the following possibilities:
+.LS
+.LI
+You just realized you don't want to use Plan 9 at all\&.
+.LI
+You don't like the people who use and/or work on 9front\&.
+.LI
+You don't like 9front's propaganda\&.
+.LI
+You prefer less functionality from your obscure OS, and/or you prefer
+to ignore 9front's public commit history and complain later because
+nobody informed you about bug fixes and new programs\&.
+.LI
+You have technical objections to specific changes 9front made to the
+original Bell Labs code\&.
+.LI
+You're not sure right now, but you'll know it when you see it\&.
+.LE
+.PP
+Okay, carry on\&.
+.SH 3 "Why did 9front stop making fun of Nazis?"
+.FS
+.PP
+.BP "img/pipe.eps"
+.FE
+.PP
+Because you asked us to\&.
+.LS
+.LI
+People complained it was done in poor taste\&.
+.LI
+People reliably interpret any depiction of a thing as an endorsement
+of same\&.
+.LI
+We're tired of explaining this shit to people who just call us liars
+anyway\&. (To be fair, look at the world around us today\&. Why cloud the
+issue?)
+\fII'm through explainin the shit \(em Ice T\fP\c
+.NS
+https://www\&.youtube\&.com/watch?v=4FWCSBpG5q8
+.NE
+.LI
+Cognitive dissonance\&.
+.LE
+.PP
+Read:
+\fIAppendix L \(hy Ruby\fP\c
+.NS
+appendixl\&.html
+.NE
+.PP
+Possibly related:
+\fIDer Anbräuner\fP\c
+.NS
+https://www\&.nytimes\&.com/2020/10/22/arts/design/neo\(hyrauch\&.html
+.NE
+.PP
+Definitely relevant:
+\fIThey Live and the secret history of the Mozilla logo\fP\c
+.NS
+https://www\&.jwz\&.org/blog/2016/10/they\(hylive\(hyand\(hythe\(hysecret\(hyhistory\(hyof\(hythe\(hymozilla\(hylogo/
+.NE
+.PP
+This poor guy:
+\fIAnselm Kiefer\fP\c
+.NS
+https://en\&.wikipedia\&.org/wiki/Anselm_Kiefer
+.NE
+.FS
+.PP
+.BP "img/wreckastow.eps"
+.FE
+.SH 2 "New Features"
+.PP
+The following list is probably not exhaustive:
+.LS
+.LI
+\f(CW/shr\fP, global mountpoint device \f(CWshr(3)\fP\c
+.NS
+http://man\&.9front\&.org/3/shr
+.NE
+.LI
+\f(CW/mnt\fP is provided by \f(CWmntgen(4)\fP\c
+.NS
+http://man\&.9front\&.org/4/mntgen
+.NE
+.LI
+\f(CW#A\fP, audio drivers for sb16, intel hd audio and ac97 (both playback
+and recording supported!) \f(CWaudio(3)\fP\c
+.NS
+http://man\&.9front\&.org/3/audio
+.NE
+.LI
+New BIOS based boot loader \f(CW9boot(8)\fP\c
+.NS
+http://man\&.9front\&.org/8/9boot
+.NE
+featuring a console and support for FAT/ISO/PXE and being small (<8K)
+.LI
+New EFI based boot loader
+\f(CWefi\fP\c
+.NS
+http://git\&.9front\&.org/plan9front/plan9front/HEAD/sys/src/boot/efi/f\&.html
+.NE
+.LI
+Made kernel compliant to multiboot specification so it can be booted
+by qemu or grub directly\&.
+.LI
+Interruptable kernel qlocks (\f(CWeqlock\fP)
+.LI
+Deferred clunks (\f(CWcloseproc\fP) for cached mounts
+.LI
+New \f(CWrc\fP based \f(CWboot(8)\fP\c
+.NS
+http://man\&.9front\&.org/8/boot
+.NE
+allows
+breaking into a shell at any time
+.LI
+Default file system is an improved \f(CWcwfs(4)\fP\c
+.NS
+http://man\&.9front\&.org/4/cwfs
+.NE
+(cwfs64x)
+.LI "New screen fonts: "
+\f(CWdejavu\fP, \f(CWgermgoth\fP, \f(CWvga\fP
+.LI
+No central \f(CWreplica\fP; source updates are done with
+\f(CWgit (1)\fP\c
+.NS
+http://man\&.9front\&.org/1/git
+.NE
+(Mercurial)
+.LI
+Keyboard events with \f(CW/dev/kbd\fP\&.
+Read: \f(CWkbdfs (8)\fP\c
+.NS
+http://man\&.9front\&.org/8/kbdfs
+.NE
+and
+\f(CWrio (4)\fP\c
+.NS
+http://man\&.9front\&.org/4/rio
+.NE
+.LI
+\f(CW/lib/rob\fP\c
+.NS
+http://git\&.9front\&.org/plan9front/plan9front/HEAD/lib/rob/f\&.html
+.NE
+and other new corpuses, suitable as fodder for
+\f(CWfortune(1)\fP\c
+.NS
+http://man\&.9front\&.org/1/fortune
+.NE
+and other rhetorical programs
+.LI
+New \f(CWlisten(8)\fP\c
+.NS
+http://man\&.9front\&.org/8/listen
+.NE
+\f(CW\(hyp maxprocs\fP option\&.
+.LI
+Always available network
+\f(CWaan(8)\fP\c
+.NS
+http://man\&.9front\&.org/8/aan
+.NE
+support in
+\f(CWcpu(1)\fP\c
+.NS
+http://man\&.9front\&.org/1/cpu
+.NE
+and
+\f(CWrcpu(1)\fP\c
+.NS
+http://man\&.9front\&.org/1/rcpu
+.NE
+.LI
+MSI (message signalled interrupts), avoids problems with broken MP
+tables\&. Read: \f(CWicanhasmsi(8)\fP\c
+.NS
+http://man\&.9front\&.org/8/icanhasmsi
+.NE
+.LI
+Legacy free ACPI support (aml interpreter \f(CWlibaml\fP, mp interrupt
+routing, \f(CWscram\fP)
+.LI
+Added \f(CWrio(1)\fP\c
+.NS
+http://man\&.9front\&.org/1/rio
+.NE
+\f(CW\(hyb\fP option (black
+window backgrounds) and \f(CWlook\fP menu option
+.LI
+USB CD\(hyROM boot/install
+.LI
+USB drive boot\c
+.NS "I"
+fqa4\&.html#4\&.2\&.2
+.NE
+.LI
+Improved USB mouse support
+.LI
+Support for USB ptp cameras
+.LI
+Stable\(hyacross\(hymachines USB device names
+.LI
+VGA initialization done by interpreting the VESA BIOS with
+\f(CWrealemu(8)\fP,\c
+.NS
+http://man\&.9front\&.org/8/realemu
+.NE
+working VESA screen blanking\&.
+.LI
+\f(CW/dev/kbd\fP and clipboard charset support for
+\f(CWvnc(1)\fP\c
+.NS
+http://man\&.9front\&.org/1/vnc
+.NE
+.LI
+New \f(CWwebfs(4)\fP\c
+.NS
+http://man\&.9front\&.org/4/webfs
+.NE
+with HTTP1\&.1 and
+Keep\(hyAlive support\&.
+.LI
+Qemu/KVM virtio block device and ethernet drivers\&. Read:
+\fIFQA 4\&.5\&.1\&.3 \(hy Virtio\fP\c
+.NS
+fqa4\&.html#4\&.5\&.1\&.3
+.NE
+.LI
+Mouse wheel and chording support in \f(CWsam(1)\fP\c
+.NS
+http://man\&.9front\&.org/1/sam
+.NE
+.LI
+Elliptic curve cryptography \f(CWec(2)\fP\c
+.NS
+http://man\&.9front\&.org/2/ec
+.NE
+.LI
+Working interrupt key (Del) in console
+.LI
+WiFi support with wpa/wpa2
+.LI
+SSE support
+.LI
+System\(hywide support for internationalized domain names
+.LI
+Unicode support in \f(CWvt(1)\fP\c
+.NS
+http://man\&.9front\&.org/1/vt
+.NE
+.LI
+\f(CWpc64\fP,\c
+.NS
+http://git\&.9front\&.org/plan9front/plan9front/HEAD/sys/src/9/pc64/f\&.html
+.NE
+kernel for amd64
+.LI
+Numerous ciphers added and improvements made to
+\f(CWlibsec\fP\c
+.NS
+http://man\&.9front\&.org/2/pushtls
+.NE
+.LI
+New dpi9k authentication protocol
+.LE
+.SH 3 "New Programs"
+.LS
+.LI
+\f(CW\(dq\fP and \f(CW\(dq\(dq\fP (print, repeat previous command)
+.LI
+\f(CWalarm(1)\fP\c
+.NS
+http://man\&.9front\&.org/1/alarm
+.NE
+\(em timeouts in \f(CWrc\fP scripts
+.LI
+\f(CWatari(1)\fP\c
+.NS
+http://man\&.9front\&.org/1/atari
+.NE
+\(em 2600 emulator
+.LI
+\f(CWaudio(1)\fP\c
+.NS
+http://man\&.9front\&.org/1/audio
+.NE
+\(em \f(CWmp3\fP, \f(CWogg\fP, \f(CWflac\fP, \f(CWµlaw\fP, \f(CWwav\fP
+.LI
+\f(CWblit(1)\fP\c
+.NS
+http://man\&.9front\&.org/1/blit
+.NE
+\(em Blit terminal emulator
+.LI
+\f(CWbullshit(1)\fP\c
+.NS
+http://man\&.9front\&.org/1/bullshit
+.NE
+\(em print out a stream of bullshit
+.LI
+\f(CWcifsd(8)\fP\c
+.NS
+http://man\&.9front\&.org/8/cifsd
+.NE
+\(em CIFS/SMB server
+.LI
+\f(CWcryptsetup (8)\fP\c
+.NS
+http://man\&.9front\&.org/8/cryptsetup
+.NE
+\(em prepare an
+AES\(hyencrypted partition to be used with the \f(CWfs(3)\fP\c
+.NS
+http://man\&.9front\&.org/3/fs
+.NE
+device
+.LI
+\f(CWderp(1)\fP\c
+.NS
+http://man\&.9front\&.org/1/derp
+.NE
+\(em find changes between directories
+.LI
+\f(CWdtracy(1)\fP\c
+.NS
+http://man\&.9front\&.org/1/dtracy
+.NE
+\(em dynamic tracing language (like dtrace)
+.LE
+.LS
+.LI
+\f(CWfeminize(1)\fP\c
+.NS
+http://git\&.9front\&.org/plan9front/plan9front/HEAD/rc/bin/feminize/f\&.html
+.NE
+\(em replace sexist remarks
+.LI
+\f(CWfplot(1)\fP\c
+.NS
+http://man\&.9front\&.org/1/fplot
+.NE
+.LI
+New games:
+\f(CWdoom\fP,\c
+.NS
+http://git\&.9front\&.org/plan9front/plan9front/HEAD/sys/src/games/doom/f\&.html
+.NE
+\f(CWglendy\fP,\c
+.NS
+http://git\&.9front\&.org/plan9front/plan9front/HEAD/sys/src/games/glendy\&.c/f\&.html
+.NE
+\f(CWlinden\fP,\c
+.NS
+http://git\&.9front\&.org/plan9front/plan9front/HEAD/sys/src/games/linden\&.c/f\&.html
+.NE
+\f(CWmandel\fP,\c
+.NS
+http://git\&.9front\&.org/plan9front/plan9front/HEAD/sys/src/games/mandel\&.c/f\&.html
+.NE
+\f(CWmines\fP,\c
+.NS
+http://git\&.9front\&.org/plan9front/plan9front/HEAD/sys/src/games/mines/f\&.html
+.NE
+\f(CWmole\fP,\c
+.NS
+http://git\&.9front\&.org/plan9front/plan9front/HEAD/sys/src/games/mole\&.c/f\&.html
+.NE
+\f(CWpacket\fP,\c
+.NS
+http://git\&.9front\&.org/plan9front/plan9front/HEAD/sys/src/games/packet\&.c/f\&.html
+.NE
+\f(CWv8e\fP\c
+.NS
+http://git\&.9front\&.org/plan9front/plan9front/HEAD/sys/src/games/v8e/f\&.html
+.NE
+.LI
+\f(CWgit(1)\fP\c
+.NS
+http://man\&.9front\&.org/1/git
+.NE
+\(em native git client
+.LI
+\f(CWhget(1)\fP\c
+.NS
+http://man\&.9front\&.org/1/hget
+.NE
+\(em rewritten in \f(CWrc\fP, now
+uses \f(CWwebfs\fP
+.LE
+.bp

@@ -2,6 +2,14 @@
 
 # What is Plan 9
 
+IMAGE: {
+	img/csrc.jpg
+}
+
+IMAGE: {
+	img/plan9team1995.jpg
+}
+
 Plan 9 is a research operating system from the same group who created
 UNIX at [Bell Labs Computing Sciences Research Center](https://web.archive.org/web/20150221121232/http://cm.bell-labs.com/cm/cs/alumni.html)
 (CSRC).  It emerged in the late 1980s, and its early development
@@ -79,6 +87,10 @@ and
 [FQA 7 - System Management;](fqa7.html)
 for a more detailed overview of Plan 9's design.
 
+IMAGE: {
+	img/fork.jpg
+}
+
 Today, Plan 9 continues in its original form, as well as in several
 derivatives and forks.
 
@@ -125,6 +137,10 @@ derivatives and forks.
   Now offering downloads of historical Plan 9 releases.
 
 ## Plan 9 is not UNIX
+
+IMAGE: {
+	img/notunix.jpg
+}
 
 In the words of the
 [Bell Labs Plan 9 wiki:](https://9p.io/wiki/plan9/plan_9_wiki/fqa.html)
@@ -181,6 +197,10 @@ to the Go programming language.
 
 
 ## Plan 9 is not Inferno
+
+IMAGE: {
+	img/inferno.png
+}
 
 [Inferno](http://www.vitanuova.com/inferno/index.html)
 is a distributed operating system also created at Bell Labs, but which
@@ -258,6 +278,10 @@ See:
 
 On the other hand, the roaring 2020s have seen Plan 9 sprout a
 substantial presence on social media, so if you're here for that, YMMV.
+
+IMAGE: {
+	img/itsbeyondmycontrol.jpg
+}
 
 
 # Why Plan 9?
@@ -367,6 +391,10 @@ missing from Plan 9:
 [http://c2.com/cgi/wiki?WhatIsNotInPlanNine](http://c2.com/cgi/wiki?WhatIsNotInPlanNine)
 
 ## Why did Plan 9's creators give up on Plan 9?
+
+IMAGE: {
+	img/belllabs.jpg
+}
 
 All of the people who worked on Plan 9 have moved on from Bell Labs
 and/or no longer work on Plan 9. Various reasons have been articulated
@@ -484,6 +512,10 @@ Russ Cox
 
 ### Why did Plan 9's users give up on Plan 9?
 
+IMAGE: {
+	img/suncart.png
+}
+
 They probably have their reasons.
 
 ### Why did CIA give up on Plan 9?
@@ -491,6 +523,10 @@ They probably have their reasons.
 [Someone tried to find out.](https://www.muckrock.com/foi/united-states-of-america-10/foia-cia-plan-9-from-bell-labs-82547/)
 
 ### What is the deal with Plan 9's weird license?
+
+IMAGE: {
+	img/intellectualproperty.jpg
+}
 
 Over the years Plan 9 has been released under various licenses, to the
 consternation of many.
@@ -637,6 +673,10 @@ Much other valuable information can be found at [http://cat-v.org](http://cat-v.
 regarding aspects of UNIX, Plan 9, and software in general.
 
 ## Books
+
+IMAGE: {
+	img/books.jpg
+}
 
 [*Introduction to OS Abstractions Using Plan 9 From Bell Labs*,](http://plan9.stanleylieber.com/_books/comp/plan9/Introduction.To.OS.Abstractions.Using.Plan.9.From.Bell.Labs.draft.2007.pdf)
 by [Francisco J Ballesteros (nemo)](http://lsub.org/who/nemo)

@@ -1,0 +1,208 @@
+<h1 id="introduction-to-9front">Introduction to 9front</h1>
+<figure><img src="img/9frontsystem.jpg" alt=""></figure>
+<h2 id="what-is-9front">What is 9front?</h2>
+<p>Plan9front (or 9front) is a fork of the
+<a href="https://9p.io/plan9/">Plan 9 from Bell Labs</a>
+operating system.
+The project was started to remedy a perceived lack of devoted
+development resources inside Bell Labs, and has accumulated various
+<a href="http://git.9front.org/plan9front/plan9front/HEAD/info.html">fixes</a>
+and
+<a href="fqa1.html#1.3.1">improvements.</a>
+</p>
+<p>This FQA specifically covers only the most recent release of 9front.
+</p>
+<h3 id="cirno">Cirno</h3>
+<figure><img src="img/cirno.jpg" alt=""></figure>
+<p>At some point, <a href="http://touhou.wikia.com/wiki/Cirno">Cirno</a> became
+associated with 9front. Details are sketchy, but this image has been in
+the wiki since the Google Code days, so I'm leaving it in.
+</p>
+<p><strong>Pro.</strong> </p>
+<ul><li>girl
+<li>has magical powers
+<li>associated with 9
+<li>upsets kfx
+<li>she is known to be the strongest
+</li>
+</ul>
+<p><strong>Alternatives.</strong> </p>
+<figure><img src="img/tuttleglenda.png" alt=""></figure>
+<figure><img src="img/grumpycatno.jpg" alt=""></figure>
+<h2 id="on-what-systems-does-9front-run">On what systems does 9front run?</h2>
+<p>9front runs on the following platforms:
+• 386
+• amd64
+• arm
+• arm64
+• mips
+</p>
+<p>Read:
+<a href="fqa3.html#3.2"><em>FQA 3.2 - Selecting Hardware</em></a>
+</p>
+<h2 id="why-might-i-want-to-use-9front">Why might I want to use 9front?</h2>
+<p>It is very likely that you do not.
+</p>
+<p>New users frequently want to know whether 9front is superior to some
+other free UNIX-like operating system. Consider: The question is largely
+unanswerable. What are your criteria? Why are you even using computers
+in the first place? Exploring these questions and the implications that
+derive therefrom may help you sharpen your perceptions and eventually
+come to some sort of conclusion about which operating system you prefer
+to use for daily tasks.
+</p>
+<p>Ultimately, whether or not 9front is for you is a question only you can
+answer.
+</p>
+<p>Note: The above text is lightly plagiarized from the
+<a href="http://www.openbsd.org/faq/">OpenBSD FAQ.</a>
+</p>
+<h3 id="why-might-i-not-want-to-use-9front">Why might I not want to use 9front?</h3>
+<p>Hold up. Before you get too excited, consider the following possibilities:
+</p>
+<ul><li>You just realized you don't want to use Plan 9 at all.
+<li>You don't like the people who use and/or work on 9front.
+<li>You don't like 9front's propaganda.
+<li>You prefer less functionality from your obscure OS, and/or you prefer
+to ignore 9front's public commit history and complain later because
+nobody informed you about bug fixes and new programs.
+<li>You have technical objections to specific changes 9front made to the
+original Bell Labs code.
+<li>You're not sure right now, but you'll know it when you see it.
+</li>
+</ul>
+<p>Okay, carry on.
+</p>
+<h4 id="why-did-9front-stop-making-fun-of-nazis">Why did 9front stop making fun of Nazis?</h4>
+<figure><img src="img/pipe.jpg" alt=""></figure>
+<p>Because you asked us to.
+</p>
+<ul><li>People complained it was done in poor taste.
+<li>People reliably interpret any depiction of a thing as an endorsement
+of same.
+<li>We're tired of explaining this shit to people who just call us liars
+anyway. (To be fair, look at the world around us today. Why cloud the
+issue?)
+<a href="https://www.youtube.com/watch?v=4FWCSBpG5q8"><em>I'm through explainin the shit -- Ice T</em></a>
+<li>Cognitive dissonance.
+</li>
+</ul>
+<p>Read:
+<a href="appendixl.html"><em>Appendix L - Ruby</em></a>
+</p>
+<p>Possibly related:
+<a href="https://www.nytimes.com/2020/10/22/arts/design/neo-rauch.html"><em>Der Anbräuner</em></a>
+</p>
+<p>Definitely relevant:
+<a href="https://www.jwz.org/blog/2016/10/they-live-and-the-secret-history-of-the-mozilla-logo/"><em>They Live and the secret history of the Mozilla logo</em></a>
+</p>
+<p>This poor guy:
+<a href="https://en.wikipedia.org/wiki/Anselm_Kiefer"><em>Anselm Kiefer</em></a>
+</p>
+<figure><img src="img/wreckastow.png" alt=""></figure>
+<h3 id="new-features">New Features</h3>
+<p>The following list is probably not exhaustive:
+</p>
+<ul><li><code>/shr</code>, global mountpoint device <a href="http://man.9front.org/3/shr"><code>shr(3)</code></a>
+<li><code>/mnt</code> is provided by <a href="http://man.9front.org/4/mntgen"><code>mntgen(4)</code></a>
+<li><code>#A</code>, audio drivers for sb16, intel hd audio and ac97 (both playback
+and recording supported!) <a href="http://man.9front.org/3/audio"><code>audio(3)</code></a>
+<li>New BIOS based boot loader <a href="http://man.9front.org/8/9boot"><code>9boot(8)</code></a>
+featuring a console and support for FAT/ISO/PXE and being small (&lt;8K)
+<li>New EFI based boot loader
+<a href="http://git.9front.org/plan9front/plan9front/HEAD/sys/src/boot/efi/f.html"><code>efi</code></a>
+<li>Made kernel compliant to multiboot specification so it can be booted
+by qemu or grub directly.
+<li>Interruptable kernel qlocks (<code>eqlock</code>)
+<li>Deferred clunks (<code>closeproc</code>) for cached mounts
+<li>New <code>rc</code> based <a href="http://man.9front.org/8/boot"><code>boot(8)</code></a> allows
+breaking into a shell at any time
+<li>Default file system is an improved <a href="http://man.9front.org/4/cwfs"><code>cwfs(4)</code></a>
+(cwfs64x)
+<li><strong>New screen fonts: </strong><code>dejavu</code>, <code>germgoth</code>, <code>vga</code>
+<li>No central <code>replica</code>; source updates are done with
+<a href="http://man.9front.org/1/git"><code>git (1)</code></a>
+(Mercurial)
+<li>Keyboard events with <code>/dev/kbd</code>.
+Read: <a href="http://man.9front.org/8/kbdfs"><code>kbdfs (8)</code></a>
+and
+<a href="http://man.9front.org/4/rio"><code>rio (4)</code></a>
+<li><a href="http://git.9front.org/plan9front/plan9front/HEAD/lib/rob/f.html"><code>/lib/rob</code></a>
+and other new corpuses, suitable as fodder for
+<a href="http://man.9front.org/1/fortune"><code>fortune(1)</code></a>
+and other rhetorical programs
+<li>New <a href="http://man.9front.org/8/listen"><code>listen(8)</code></a> <code>-p maxprocs</code> option.
+<li>Always available network
+<a href="http://man.9front.org/8/aan"><code>aan(8)</code></a>
+support in
+<a href="http://man.9front.org/1/cpu"><code>cpu(1)</code></a>
+and
+<a href="http://man.9front.org/1/rcpu"><code>rcpu(1)</code></a>
+<li>MSI (message signalled interrupts), avoids problems with broken MP
+tables. Read: <a href="http://man.9front.org/8/icanhasmsi"><code>icanhasmsi(8)</code></a>
+<li>Legacy free ACPI support (aml interpreter <code>libaml</code>, mp interrupt
+routing, <code>scram</code>)
+<li>Added <a href="http://man.9front.org/1/rio"><code>rio(1)</code></a> <code>-b</code> option (black
+window backgrounds) and <code>look</code> menu option
+<li>USB CD-ROM boot/install
+<li>USB <a href="fqa4.html#4.2.2">drive boot</a>I
+<li>Improved USB mouse support
+<li>Support for USB ptp cameras
+<li>Stable-across-machines USB device names
+<li>VGA initialization done by interpreting the VESA BIOS with
+<a href="http://man.9front.org/8/realemu"><code>realemu(8)</code>,</a>
+working VESA screen blanking.
+<li><code>/dev/kbd</code> and clipboard charset support for
+<a href="http://man.9front.org/1/vnc"><code>vnc(1)</code></a>
+<li>New <a href="http://man.9front.org/4/webfs"><code>webfs(4)</code></a> with HTTP1.1 and
+Keep-Alive support.
+<li>Qemu/KVM virtio block device and ethernet drivers. Read:
+<a href="fqa4.html#4.5.1.3"><em>FQA 4.5.1.3 - Virtio</em></a>
+<li>Mouse wheel and chording support in <a href="http://man.9front.org/1/sam"><code>sam(1)</code></a>
+<li>Elliptic curve cryptography <a href="http://man.9front.org/2/ec"><code>ec(2)</code></a>
+<li>Working interrupt key (Del) in console
+<li>WiFi support with wpa/wpa2
+<li>SSE support
+<li>System-wide support for internationalized domain names
+<li>Unicode support in <a href="http://man.9front.org/1/vt"><code>vt(1)</code></a>
+<li><a href="http://git.9front.org/plan9front/plan9front/HEAD/sys/src/9/pc64/f.html"><code>pc64</code>,</a>
+kernel for amd64
+<li>Numerous ciphers added and improvements made to
+<a href="http://man.9front.org/2/pushtls"><code>libsec</code></a>
+<li>New dpi9k authentication protocol
+</li>
+</ul>
+<h4 id="new-programs">New Programs</h4>
+<ul><li><code>&quot;</code> and <code>&quot;&quot;</code> (print, repeat previous command)
+<li><a href="http://man.9front.org/1/alarm"><code>alarm(1)</code></a> -- timeouts in <code>rc</code> scripts
+<li><a href="http://man.9front.org/1/atari"><code>atari(1)</code></a> -- 2600 emulator
+<li><a href="http://man.9front.org/1/audio"><code>audio(1)</code></a> -- <code>mp3</code>, <code>ogg</code>, <code>flac</code>, <code>µlaw</code>, <code>wav</code>
+<li><a href="http://man.9front.org/1/blit"><code>blit(1)</code></a> -- Blit terminal emulator
+<li><a href="http://man.9front.org/1/bullshit"><code>bullshit(1)</code></a> -- print out a stream of bullshit
+<li><a href="http://man.9front.org/8/cifsd"><code>cifsd(8)</code></a> -- CIFS/SMB server
+<li><a href="http://man.9front.org/8/cryptsetup"><code>cryptsetup (8)</code></a> -- prepare an
+AES-encrypted partition to be used with the <a href="http://man.9front.org/3/fs"><code>fs(3)</code></a>
+device
+<li><a href="http://man.9front.org/1/derp"><code>derp(1)</code></a> -- find changes between directories
+<li><a href="http://man.9front.org/1/dtracy"><code>dtracy(1)</code></a> -- dynamic tracing language (like dtrace)
+</li>
+</ul>
+<ul><li><a href="http://git.9front.org/plan9front/plan9front/HEAD/rc/bin/feminize/f.html"><code>feminize(1)</code></a>
+-- replace sexist remarks
+<li><a href="http://man.9front.org/1/fplot"><code>fplot(1)</code></a>
+<li>New games:
+<a href="http://git.9front.org/plan9front/plan9front/HEAD/sys/src/games/doom/f.html"><code>doom</code>,</a>
+<a href="http://git.9front.org/plan9front/plan9front/HEAD/sys/src/games/glendy.c/f.html"><code>glendy</code>,</a>
+<a href="http://git.9front.org/plan9front/plan9front/HEAD/sys/src/games/linden.c/f.html"><code>linden</code>,</a>
+<a href="http://git.9front.org/plan9front/plan9front/HEAD/sys/src/games/mandel.c/f.html"><code>mandel</code>,</a>
+<a href="http://git.9front.org/plan9front/plan9front/HEAD/sys/src/games/mines/f.html"><code>mines</code>,</a>
+<a href="http://git.9front.org/plan9front/plan9front/HEAD/sys/src/games/mole.c/f.html"><code>mole</code>,</a>
+<a href="http://git.9front.org/plan9front/plan9front/HEAD/sys/src/games/packet.c/f.html"><code>packet</code>,</a>
+<a href="http://git.9front.org/plan9front/plan9front/HEAD/sys/src/games/v8e/f.html"><code>v8e</code></a>
+<li><a href="http://man.9front.org/1/git"><code>git(1)</code></a> -- native git client
+<li><a href="http://man.9front.org/1/hget"><code>hget(1)</code></a> -- rewritten in <code>rc</code>, now
+uses <code>webfs</code>
+</li>
+</ul>
+
+.bp

@@ -7,13 +7,21 @@
 .wh 0 tM
 .wh -\\n(MBu/2u bT
 .wh -\\n(MBu bM
+.em eN
 .tM
 .nr iN 0
 .nr bG 1
 .\"pl \\n(PHu
 ..
+.       \" end of text
+.de eN
+\c
+.bM
+.if \\*(cH .if o 'bp
+..
 .       \" begin of body
 .de bY
+.fi
 .if !\\n(bG .bG
 .sp 2
 .ns
@@ -21,7 +29,7 @@
 ..
 .       \" top margin
 .de tM
-'sp \\n(MTu/2u
+'sp \\n(MTu/3u
 .ev 2
 .lt \\n(LLu
 .ft R
@@ -33,11 +41,28 @@
 'ns
 .nr fI 0
 .nr sI 0
-.nr mT 1
 .nr nI 0 1
 .nr nP 0-\\n(MB
 .ch bM -\\n(MBu
 .if \\n(dn .nZ
+..
+.       \" table of contents
+.de TC
+.bp
+.rT
+.nf
+..
+.       \" index chapter
+.de IC
+.ta 0.3i 6.5iR
+.sp 1v
+\fB\\$2	\\$3\\$1\fP
+..
+.       \" index section
+.de IS
+.ta 0.3i 1i 6.5iR
+.br
+\fR	\\$2	\\$3\\$1\fP
 ..
 .       \" bottom margin
 .de bM
@@ -55,6 +80,7 @@
 ..
 .       \" reset
 .de rT
+.nr mT 1
 .if !\\n(bY .bY
 .br
 .ce 0
@@ -79,6 +105,7 @@
 .ds tL \\$1
 .nr mT 0
 .if !\\n(bG .bG
+.sp 9v
 .ce 999
 .ft B
 .ps \\n(PS+4
@@ -86,22 +113,19 @@
 .ne 4
 .hy 0
 .nf
-.ie !"\\$2"" \{\
-\XPDFMark: Title \\$1: \\$2\\$1:
-.br
-\\$2
-.\}
-.el \{\
-\XPDFMark: Title \\$1\\$1
-.\}
+\XPDFMark: Title \\$1
+.sp 9v
 ..
 .       \" chapter
 .de CH
+.ce 0
 .rm sH
-.ds cH \\$1
 .nr mT 0
 .if \\n%>1       .bp
 .if \\n%>1 .if e .bp
+.ie \\*(cH .nr % 1
+.ds cH \\$1
+.nr nC 0 1
 .nr bY 0
 .nr h0 +1
 .nr h1 0
@@ -129,6 +153,7 @@
 .el \{\
 \\$1
 .\}
+.tm index:.IC "\\n%" "\\n(h0" "\\$1"
 ..
 .       \" author
 .de AU
@@ -196,6 +221,7 @@
 \XPDFMark: Bookmark \\n(sL \\*(sN \\$2\\*(sN \\$2
 .nr sI 1
 .nr fI 0
+.tm index:.IS "\\n%" "\\*(sN" "\\$2"
 ..
 .       \" figure start
 .de FS
@@ -237,19 +263,6 @@
 .el       .nf
 .rm fC
 .rr fC
-..
-.       \" table start
-.de TS
-.br
-.nf
-..
-.       \" picture start
-.de PS
-.in ((\\n(.lu-\\n(.iu)/2u)-(\\$2/2u)
-..
-.       \" picture end
-.de PE
-.in
 ..
 .       \" code start
 .de CS
@@ -430,8 +443,23 @@
 .de tT
 .ps \\n(PS-2
 .vs \\n(VS-2p
-.ie \\n%=1 .tl 
-.el        .tl %
+.ie \\*(cH .tl 
+.el .ie \\n(mT \{
+.       if e \{\
+.              ie !"\\*(cH"" .tl %\\*(cH
+.              el            .tl %\\*(tL
+.       \}
+.       if o \{\
+.              ie !"\\*(sH"" .tl \\*(sH%
+.              el                %
+.       \}
+.       br
+.       in 0
+.       if n _________________________
+.       if t \l'\\n(LLu'
+.       br
+.\}
+.el .tl 
 ..
 .       \" paragraph break
 .de pB
@@ -465,8 +493,8 @@
 .nr SP 0
 .nr PI 5n
 .nr PD 1v
-.nr PS 12
-.nr VS 14
+.nr PS 10
+.nr VS 12
 .nr h0 -1
 .       \" page size (ISO B5)
 .\"if !\n(LL .nr LL 4.9i  \" line length
@@ -478,9 +506,9 @@
 .
 .       \" page size (ISO A4)
 .if !\n(LL .nr LL 16c   \" line length
-.if !\n(MB .nr MB 2c    \" bottom margin
+.if !\n(MB .nr MB 2.5c  \" bottom margin
 .if !\n(ME .nr ME 2.5c  \" left margin for even pages
 .if !\n(MO .nr MO 2.5c  \" left margin for odd pages
-.if !\n(MT .nr MT 2c    \" top margin
+.if !\n(MT .nr MT 2.5c  \" top margin
 .\"if !\n(PH .nr PH 27.7c \" page height
 \" there's no page width, it's not needed for troff

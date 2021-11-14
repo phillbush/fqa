@@ -63,7 +63,7 @@ BEGIN {
 	markup["roff", "EQN", "BEG"] = ".EQ\n"
 	markup["roff", "EQN", "END"] = ".EN\n"
 	markup["roff", "IMAGE", "BEG"] = ".PP\n"
-	markup["roff", "IMAGE", "MID"] = ".BP \"%s\" \"\" \"\" \"c\" \"\" \"\" \"\"\n"
+	markup["roff", "IMAGE", "MID"] = ".BP \"%s\"\n"
 	markup["roff", "IMAGE", "END"] = ""
 	markup["roff", "CAPTION", "MID"] = ".FC \"%s\" \"%s\"\n"
 	markup["roff", "TABLE", "BEG"] = ".TS\ncenter, %s;\n"
@@ -149,8 +149,6 @@ BEGIN {
 	markup["html", "LINK", "END"] = "</a>"
 	markup["html", "BREAK", "MID"] = "<br/>"
 
-	if (troff)
-		inittroff()
 	document()
 }
 
@@ -159,15 +157,6 @@ function err(str) {
 	printf "incipit: %s\n", str >"/dev/stderr"
 	error = 1
 	exit error
-}
-
-# initiate number records and fonts for troff
-function inittroff() {
-	print ".fp 1 R LucidaSans"
-	print ".fp 2 I LucidaSansI"
-	print ".fp 3 B LucidaSansB"
-	print ".fp 4 BI LucidaSansI"
-	print ".fp 5 CW LucidaCW"
 }
 
 # unget token
@@ -264,7 +253,7 @@ function escape(s) {
 		gsub(/"/, "\\(dq", s)
 		gsub(/--/, "\\(em", s)
 		#gsub(/'/, "\\(aq", s)
-		sub(/\./, "\\\\\\&&", s)
+		gsub(/\./, "\\\\\\&&", s)
 	} else if (html) {
 		gsub(/&/, "\\&amp;", s)
 		gsub(/</, "\\&lt;", s)
@@ -282,12 +271,12 @@ function printinlinecode(s) {
 }
 
 # print text
-function printnormal(s) {
+function normalize(s) {
 	sub(/^[ \t]+/, "", s)
 	gsub(/[ \t]+/, " ", s)
 	if (troff)
 		gsub(/`/, "\\(ga", s)
-	printf "%s", escape(s)
+	return escape(s)
 }
 
 # do inline punctuation expansion
@@ -418,18 +407,20 @@ function punctuate(s) {
 }
 
 # parse document title
-function title(    id, s) {
+function title(    id, s, name, subname) {
 	printf markup[type, "TITLE", "BEG"], genid(tok)
 	s = substr(tok, length(tok), 1) == ":"
 	if (troff)
 		sub(/:$/, "", tok)
-	printnormal(tok)
+	name = normalize(tok)
+	printf "%s", name
 	if (s) {
 		if (gettok() > 0) {
 			if (toktype == NONE) {
 				printf markup[type, "SUBTITLE", "BEG"]
 				sub(/.$/, "", tok)
-				printf "%s", punctuate(tok)
+				subname = punctuate(tok)
+				printf "%s", subname
 				printf markup[type, "SUBTITLE", "END"]
 			} else {
 				ungettok()
@@ -446,7 +437,7 @@ function author(    ret, inst) {
 	if (troff)
 		sub(/:$/, "", tok)
 	printf markup[type, "AUTHOR1", "BEG"]
-	printnormal(tok)
+	printf "%s", normalize(tok)
 	printf markup[type, "AUTHOR1", "END"]
 	if (s) {
 		if (gettok() > 0) {
@@ -566,6 +557,8 @@ function image(    ret, fig, caption) {
 			break
 		sub(/^[ \t]+/, "")
 		sub(/[ \t]+$/, "")
+		if (troff)
+			sub(/(jpg|gif|png)$/, "eps")
 		printf markup[type, "IMAGE", "MID"], $0, caption
 	}
 	if (ret != 1) {
@@ -633,7 +626,7 @@ function enumeration(    enum, lvl, enumlvl, label, colon) {
 			printf markup[type, "ITEM", "BEG"]
 			if (colon != "") {
 				printf markup[type, "COLON", "BEG"]
-				printnormal(colon)
+				printf "%s", normalize(colon)
 				printf markup[type, "COLON", "END"]
 			}
 			printf markup[type, "ITEM", "MID"]
@@ -654,7 +647,7 @@ function enumeration(    enum, lvl, enumlvl, label, colon) {
 }
 
 # parse section
-function section(    lvl) {
+function section(    lvl, name) {
 	lvl = (type == "html") ? 1 : 0
 	while (tok ~ /^(#)/) {
 		lvl++
@@ -663,7 +656,8 @@ function section(    lvl) {
 	if (gettok() < 0)
 		return
 	printf markup[type, "SECTION", "BEG"], lvl, genid(tok)
-	printf "%s", punctuate(tok)
+	name = punctuate(tok)
+	printf "%s", name
 	printf markup[type, "SECTION", "END"], lvl
 }
 
@@ -800,4 +794,5 @@ END {
 	if (error) {
 		exit error
 	}
+	print ".bp"
 }

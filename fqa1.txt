@@ -1,0 +1,227 @@
+                         Introduction to 9front
+
+IMAGE: {
+	img/9frontsystem.jpg
+}
+
+# What is 9front?
+
+Plan9front (or 9front) is a fork of the
+[Plan 9 from Bell Labs](https://9p.io/plan9/)
+operating system.
+The project was started to remedy a perceived lack of devoted
+development resources inside Bell Labs, and has accumulated various
+[fixes](http://git.9front.org/plan9front/plan9front/HEAD/info.html)
+and
+[improvements.](fqa1.html#1.3.1)
+
+This FQA specifically covers only the most recent release of 9front.
+
+
+## Cirno
+
+IMAGE: {
+	img/cirno.jpg
+}
+
+At some point, [Cirno](http://touhou.wikia.com/wiki/Cirno) became
+associated with 9front. Details are sketchy, but this image has been in
+the wiki since the Google Code days, so I'm leaving it in.
+
+.Pro.
+- girl
+- has magical powers
+- associated with 9
+- upsets kfx
+- she is known to be the strongest
+
+.Alternatives.
+
+IMAGE: {
+	img/tuttleglenda.png
+}
+
+IMAGE: {
+	img/grumpycatno.jpg
+}
+
+
+# On what systems does 9front run?
+
+9front runs on the following platforms:
+• 386
+• amd64
+• arm
+• arm64
+• mips
+
+Read:
+[*FQA 3.2 - Selecting Hardware*](fqa3.html#3.2)
+
+# Why might I want to use 9front?
+
+It is very likely that you do not.
+
+New users frequently want to know whether 9front is superior to some
+other free UNIX-like operating system. Consider: The question is largely
+unanswerable. What are your criteria? Why are you even using computers
+in the first place? Exploring these questions and the implications that
+derive therefrom may help you sharpen your perceptions and eventually
+come to some sort of conclusion about which operating system you prefer
+to use for daily tasks.
+
+Ultimately, whether or not 9front is for you is a question only you can
+answer.
+
+Note: The above text is lightly plagiarized from the
+[OpenBSD FAQ.](http://www.openbsd.org/faq/)
+
+## Why might I not want to use 9front?
+
+Hold up. Before you get too excited, consider the following possibilities:
+- You just realized you don't want to use Plan 9 at all.
+- You don't like the people who use and/or work on 9front.
+- You don't like 9front's propaganda.
+- You prefer less functionality from your obscure OS, and/or you prefer
+  to ignore 9front's public commit history and complain later because
+  nobody informed you about bug fixes and new programs.
+- You have technical objections to specific changes 9front made to the
+  original Bell Labs code.
+- You're not sure right now, but you'll know it when you see it.
+
+Okay, carry on.
+
+### Why did 9front stop making fun of Nazis?
+
+IMAGE: {
+	img/pipe.jpg
+}
+
+Because you asked us to.
+- People complained it was done in poor taste.
+- People reliably interpret any depiction of a thing as an endorsement
+  of same.
+- We're tired of explaining this shit to people who just call us liars
+  anyway. (To be fair, look at the world around us today. Why cloud the
+  issue?)
+  [*I'm through explainin the shit -- Ice T*](https://www.youtube.com/watch?v=4FWCSBpG5q8)
+- Cognitive dissonance.
+
+Read:
+[*Appendix L - Ruby*](appendixl.html)
+
+Possibly related:
+[*Der Anbräuner*](https://www.nytimes.com/2020/10/22/arts/design/neo-rauch.html)
+
+Definitely relevant:
+[*They Live and the secret history of the Mozilla logo*](https://www.jwz.org/blog/2016/10/they-live-and-the-secret-history-of-the-mozilla-logo/)
+
+This poor guy:
+[*Anselm Kiefer*](https://en.wikipedia.org/wiki/Anselm_Kiefer)
+
+IMAGE: {
+	img/wreckastow.png
+}
+
+## New Features
+
+The following list is probably not exhaustive:
+- `/shr`, global mountpoint device [`shr(3)`](http://man.9front.org/3/shr)
+- `/mnt` is provided by [`mntgen(4)`](http://man.9front.org/4/mntgen)
+- `#A`, audio drivers for sb16, intel hd audio and ac97 (both playback
+  and recording supported!) [`audio(3)`](http://man.9front.org/3/audio)
+- New BIOS based boot loader [`9boot(8)`](http://man.9front.org/8/9boot)
+  featuring a console and support for FAT/ISO/PXE and being small (<8K)
+- New EFI based boot loader
+  [`efi`](http://git.9front.org/plan9front/plan9front/HEAD/sys/src/boot/efi/f.html)
+- Made kernel compliant to multiboot specification so it can be booted
+  by qemu or grub directly.
+- Interruptable kernel qlocks (`eqlock`)
+- Deferred clunks (`closeproc`) for cached mounts
+- New `rc` based [`boot(8)`](http://man.9front.org/8/boot) allows
+  breaking into a shell at any time
+- Default file system is an improved [`cwfs(4)`](http://man.9front.org/4/cwfs)
+  (cwfs64x)
+- New screen fonts: `dejavu`, `germgoth`, `vga`
+- No central `replica`; source updates are done with
+  [`git (1)`](http://man.9front.org/1/git)
+  (Mercurial)
+- Keyboard events with `/dev/kbd`.
+  Read: [`kbdfs (8)`](http://man.9front.org/8/kbdfs)
+  and
+  [`rio (4)`](http://man.9front.org/4/rio)
+- [`/lib/rob`](http://git.9front.org/plan9front/plan9front/HEAD/lib/rob/f.html)
+  and other new corpuses, suitable as fodder for
+  [`fortune(1)`](http://man.9front.org/1/fortune)
+  and other rhetorical programs
+- New [`listen(8)`](http://man.9front.org/8/listen) `-p maxprocs` option.
+- Always available network
+  [`aan(8)`](http://man.9front.org/8/aan)
+  support in
+  [`cpu(1)`](http://man.9front.org/1/cpu)
+  and
+  [`rcpu(1)`](http://man.9front.org/1/rcpu)
+- MSI (message signalled interrupts), avoids problems with broken MP
+  tables. Read: [`icanhasmsi(8)`](http://man.9front.org/8/icanhasmsi)
+- Legacy free ACPI support (aml interpreter `libaml`, mp interrupt
+  routing, `scram`)
+- Added [`rio(1)`](http://man.9front.org/1/rio) `-b` option (black
+  window backgrounds) and `look` menu option
+- USB CD-ROM boot/install
+- USB [drive boot](fqa4.html#4.2.2)I
+- Improved USB mouse support
+- Support for USB ptp cameras
+- Stable-across-machines USB device names
+- VGA initialization done by interpreting the VESA BIOS with
+  [`realemu(8)`,](http://man.9front.org/8/realemu)
+  working VESA screen blanking.
+- `/dev/kbd` and clipboard charset support for
+  [`vnc(1)`](http://man.9front.org/1/vnc)
+- New [`webfs(4)`](http://man.9front.org/4/webfs) with HTTP1.1 and
+  Keep-Alive support.
+- Qemu/KVM virtio block device and ethernet drivers. Read:
+  [*FQA 4.5.1.3 - Virtio*](fqa4.html#4.5.1.3)
+- Mouse wheel and chording support in [`sam(1)`](http://man.9front.org/1/sam)
+- Elliptic curve cryptography [`ec(2)`](http://man.9front.org/2/ec)
+- Working interrupt key (Del) in console
+- WiFi support with wpa/wpa2
+- SSE support
+- System-wide support for internationalized domain names
+- Unicode support in [`vt(1)`](http://man.9front.org/1/vt)
+- [`pc64`,](http://git.9front.org/plan9front/plan9front/HEAD/sys/src/9/pc64/f.html)
+  kernel for amd64
+- Numerous ciphers added and improvements made to
+  [`libsec`](http://man.9front.org/2/pushtls)
+- New dpi9k authentication protocol
+
+
+### New Programs
+
+- `"` and `""` (print, repeat previous command)
+- [`alarm(1)`](http://man.9front.org/1/alarm) -- timeouts in `rc` scripts
+- [`atari(1)`](http://man.9front.org/1/atari) -- 2600 emulator
+- [`audio(1)`](http://man.9front.org/1/audio) -- `mp3`, `ogg`, `flac`, `µlaw`, `wav`
+- [`blit(1)`](http://man.9front.org/1/blit) -- Blit terminal emulator
+- [`bullshit(1)`](http://man.9front.org/1/bullshit) -- print out a stream of bullshit
+- [`cifsd(8)`](http://man.9front.org/8/cifsd) -- CIFS/SMB server
+- [`cryptsetup (8)`](http://man.9front.org/8/cryptsetup) -- prepare an
+  AES-encrypted partition to be used with the [`fs(3)`](http://man.9front.org/3/fs)
+  device
+- [`derp(1)`](http://man.9front.org/1/derp) -- find changes between directories
+- [`dtracy(1)`](http://man.9front.org/1/dtracy) -- dynamic tracing language (like dtrace)
+
+- [`feminize(1)`](http://git.9front.org/plan9front/plan9front/HEAD/rc/bin/feminize/f.html)
+  -- replace sexist remarks
+- [`fplot(1)`](http://man.9front.org/1/fplot)
+- New games:
+  [`doom`,](http://git.9front.org/plan9front/plan9front/HEAD/sys/src/games/doom/f.html)
+  [`glendy`,](http://git.9front.org/plan9front/plan9front/HEAD/sys/src/games/glendy.c/f.html)
+  [`linden`,](http://git.9front.org/plan9front/plan9front/HEAD/sys/src/games/linden.c/f.html)
+  [`mandel`,](http://git.9front.org/plan9front/plan9front/HEAD/sys/src/games/mandel.c/f.html)
+  [`mines`,](http://git.9front.org/plan9front/plan9front/HEAD/sys/src/games/mines/f.html)
+  [`mole`,](http://git.9front.org/plan9front/plan9front/HEAD/sys/src/games/mole.c/f.html)
+  [`packet`,](http://git.9front.org/plan9front/plan9front/HEAD/sys/src/games/packet.c/f.html)
+  [`v8e`](http://git.9front.org/plan9front/plan9front/HEAD/sys/src/games/v8e/f.html)
+- [`git(1)`](http://man.9front.org/1/git) -- native git client
+- [`hget(1)`](http://man.9front.org/1/hget) -- rewritten in `rc`, now
+  uses `webfs`

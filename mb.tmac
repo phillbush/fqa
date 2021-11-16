@@ -1,23 +1,17 @@
-.\" common macros
 .       \" begin of document
 .de bG
 .fi
 .ll \\n(LLu
 .lt \\n(LLu
 .wh 0 tM
+.wh 12i bM
+.wh -\\n(MBu nX
+.ch bM -\\n(MBu
 .wh -\\n(MBu/2u bT
-.wh -\\n(MBu bM
-.em eN
 .tM
 .nr iN 0
 .nr bG 1
-.\"pl \\n(PHu
-..
-.       \" end of text
-.de eN
-\c
-.bM
-.if \\*(cH .if o 'bp
+.pl \\n(PHu
 ..
 .       \" begin of body
 .de bY
@@ -46,24 +40,6 @@
 .ch bM -\\n(MBu
 .if \\n(dn .nZ
 ..
-.       \" table of contents
-.de TC
-.bp
-.rT
-.nf
-..
-.       \" index chapter
-.de IC
-.ta 0.3i 6.5iR
-.sp 1v
-\fB\\$2	\\$3\\$1\fP
-..
-.       \" index section
-.de IS
-.ta 0.3i 1i 6.5iR
-.br
-\fR	\\$2	\\$3\\$1\fP
-..
 .       \" bottom margin
 .de bM
 .nr dn 0
@@ -72,8 +48,8 @@
 .       nf
 .       nN
 .       rm nN
-.       if "\\n(.z"nY"a .di
-.       nr nN 0
+.       if \\n(.znY .di
+.       nr nI 0
 .       ev
 .\}
 'bp
@@ -98,63 +74,6 @@
 .if n .ta 8n 16n 24n 32n 40n 48n 56n 64n 72n 80n
 .if t .ta 5n 10n 15n 20n 25n 30n 35n 40n 45n 50n 55n 60n 65n 70n 75n
 ..
-.       \" title
-.de TL
-.rm sH
-.nr bY 0
-.ds tL \\$1
-.nr mT 0
-.if !\\n(bG .bG
-.sp 9v
-.ce 999
-.ft B
-.ps \\n(PS+4
-.vs \\n(VS+4p
-.ne 4
-.hy 0
-.nf
-\XPDFMark: Title \\$1
-.sp 9v
-..
-.       \" chapter
-.de CH
-.ce 0
-.rm sH
-.nr mT 0
-.if \\n%>1       .bp
-.if \\n%>1 .if e .bp
-.ie \\*(cH .nr % 1
-.ds cH \\$1
-.nr nC 0 1
-.nr bY 0
-.nr h0 +1
-.nr h1 0
-.nr h2 0
-.nr h3 0
-.nr h4 0
-.nr h5 0
-.if !\\n(bG .bG
-.fi
-.ad r
-.ft B
-.ps \\n(PS+30
-.vs \\n(VS+30p
-.ne 4
-.hy 0
-\XPDFMark: Bookmark 0 FQA \\n(h0. \\$1FQA\\n(h0
-.br
-.ps \\n(PS+12
-.vs \\n(VS+12p
-.ie !"\\$2"" \{\
-\\$1:
-.br
-\\$2
-.\}
-.el \{\
-\\$1
-.\}
-.tm index:.IC "\\n%" "\\n(h0" "\\$1"
-..
 .       \" author
 .de AU
 .ce 999
@@ -178,16 +97,81 @@
 .el            .sp \\n(PDu
 .ne 1+\\n(.Vu
 .ft R
-.ie !\\n(n? \{\
+.if !\\n(n? \{\
 .       ie \\n(SP=1                 .ti \\n(.iu+\\n(PIu
 .       el .if \\n(SP=2 .if !\\n(fI .ti \\n(.iu+\\n(PIu
-.       if !"\\$1"" \fB\\$1\fP
+.       if \\n(PN \fB\\n+(pC\fP
 .\}
-.el \{\
-.       if !"\\$1"" \fB\\$1\fP
-.\}
+.if !"\\$1"" \fB\\$1\fP
 .nr fI 0
 .nr sI 0
+..
+.       \" title
+.de TL
+.rm sH
+.nr mT 0
+.if !\\n(bG .bG
+.ce 999
+.ft B
+.ps \\n(PS+12
+.vs \\n(VS+12p
+.ne 4
+.hy 0
+.nf
+.ds tL \\$1
+\\$1
+.if !"\\$2"" \{\
+.ds tL "\\*(tL \\$2"
+.br
+\\$2
+.\}
+.if !"\\$3"" \{\
+.ds tL "\\*(tL \\$3"
+.br
+\\$3
+.\}
+.if !"\\$4"" \{\
+.ds tL "\\*(tL \\$4"
+.br
+\\$4
+.\}
+.if !"\\$5"" \{\
+.ds tL "\\*(tL \\$5"
+.br
+\\$5
+.\}
+.\XPDFMark: Title \\*(tL
+.bp
+..
+.       \" chapter
+.de CH
+.ce 0
+.rm sH
+.nr mT 0
+.if \\n%>1       .bp
+.if \\n%>1 .if e .bp
+.ie \\*(cH .nr % 1
+.nr nC 0 1
+.nr bY 0
+.nr h0 +1
+.nr h1 0
+.nr h2 0
+.nr h3 0
+.nr h4 0
+.nr h5 0
+.if !\\n(bG .bG
+.fi
+.ad r
+.ft B
+.ps \\n(PS+30
+.vs \\n(VS+30p
+.ne 4
+.hy 0
+.ds cH "FQA \\n(h0. \\$1"
+\XPDFMark: Bookmark 0 \\*(cHFQA \\n(h0
+.br
+\\$1
+.tm index:.IC "\\n%" "\\n(h0" "\\$1"
 ..
 .       \" SH - section heading
 .de SH
@@ -218,7 +202,8 @@
 .if \\n(SS>3 .if \\$1-3 .as sN \\n(h4.
 .if \\n(SS>4 .if \\$1-4 .as sN \\n(h5.
 .nr sL \\$1
-\XPDFMark: Bookmark \\n(sL \\*(sN \\$2\\*(sN \\$2
+\XPDFMark: Bookmark \\n(sL \\*(sN \\$2\\*(sN
+\\$2
 .nr sI 1
 .nr fI 0
 .tm index:.IS "\\n%" "\\*(sN" "\\$2"
@@ -228,13 +213,18 @@
 .br
 .in 0
 .ti 0
-.ie \\n(sI     .sp 1
-.el            .sp \\n(FDu
-.ns
+.di fG
 ..
 .       \" figure end
 .de FE
 .br
+.di
+.nf
+.ne \\n(dnu
+.ie \\n(sI     .sp 1
+.el            .sp \\n(FDu
+.ns
+.fG
 .nr fI 1
 .nr sI 0
 ..
@@ -263,6 +253,19 @@
 .el       .nf
 .rm fC
 .rr fC
+..
+.       \" table start
+.de TS
+.br
+.nf
+..
+.       \" picture start
+.de PS
+.in ((\\n(.lu-\\n(.iu)/2u)-(\\$2/2u)
+..
+.       \" picture end
+.de PE
+.in
 ..
 .       \" code start
 .de CS
@@ -377,18 +380,17 @@
 ..
 .       \" footnote start
 .de NS
-\s-2\v'-3p'\\n+(nC\v'3p'\s0\\$1
-'ce 0
-.di
-.ev 1
+.if !\\n(nJ \s-2\v'-3p'\\n+(nC\v'3p'\s0\\$1
 .da nN
+.ev 1
 .br
+.ll \\n(LLu
 .if \\n(n? \{\
 .       tm nested footnote
 .       ab
 .\}
 .nr n? 1
-.if !\\n+(nI-1 \{
+.if \\n+(nI=1 \{
 .       in 0
 .       if n _________________________
 .       if t \l'\\n(LLu'
@@ -397,22 +399,22 @@
 .fi
 .nr iS \\n(iN
 .nr iN 0
-.SP \\n(nC
+.if !\\n(nJ .SP \\n(nC
 ..
 .       \" footnote end
 .de NE
 .br
 .nr vS \\n(.v
 .ev
+.di
 .nr n? 0
-'di
-'nr nP -\\n(dn
-'if \\n(nI=1 .nr nP -(\\n(.v-\\n(vS)
-'ch bM \\n(nPu
-'if (\\n(nl+1v)>(\\n(.p+\\n(nP) \{\
-'       ch fo \\n(nlu+1v
-'\}
-'nr iN \\n(iS
+.nr nP -\\n(dn
+.if \\n(nI=1 .nr nP -(\\n(.v-\\n(vS)
+.ch bM \\n(nPu
+.if (\\n(nl+1v)>(\\n(.p+\\n(nP) \{\
+.       ch bM \\n(nlu+1v
+.\}
+.nr iN \\n(iS
 ..
 .       \" process footnote overflow
 .de nX
@@ -420,25 +422,30 @@
 ..
 .       \" get leftover footnote
 .de nZ
-.fn
+.nr nJ 1
+.NS
 .nf
 .nY
-.ef
+.NE
+.nr nJ 0
 ..
 .nr nC 0 1
+.nr pC 0 1
 .nr fN 0
 .nr tN 0
 .nr FL 5.5i
 .nr PD .3v
 .nr SP 2
 .nr SS 3
+.nr PN 0
 .if n .nr PD 1v
 .if t .nr PD .3v
 .if n .nr FD 1v
 .if t .nr FD 1v
 .if "\*F"" .ds F Figure
 .if "\*T"" .ds T Table
-.\" mt: macros for technical papers
+.if "\*J"" .ds J Contents
+.\" mb: macros for books
 .       \" top title
 .de tT
 .ps \\n(PS-2
@@ -446,12 +453,12 @@
 .ie \\*(cH .tl 
 .el .ie \\n(mT \{
 .       if e \{\
-.              ie !"\\*(cH"" .tl %\\*(cH
-.              el            .tl %\\*(tL
+.              ie !\\*(cH .tl %\\*(cH
+.              el               .tl %\\*(tL
 .       \}
 .       if o \{\
-.              ie !"\\*(sH"" .tl \\*(sH%
-.              el                %
+.              ie !\\*(sH .tl \\*(sH%
+.              el               .tl %
 .       \}
 .       br
 .       in 0
@@ -470,31 +477,35 @@
 .ps \\n(PS+2
 .vs \\n(VS+2p
 ..
-.       \" abstract begin
-.de AB
-.pB
-.rT
-.sp 2
-.if !"\\$1"" \{\
-.ce 1
-\fB\\$1\fP
-.\}
+.       \" table of contents
+.de TC
+.ce 0
 .fi
-.ll \\n(LLu-10n
-.in 10n
+.ad r
+.ft B
+.ps \\n(PS+30
+.vs \\n(VS+30p
+\\*J
+.sp 1
+.rT
+.nf
 ..
-.       \" abstract end
-.de AE
-.ll \\n(LLu
-.in 0
-.nr bY 0
+.       \" index chapter
+.de IC
+.ta 0.3i 6.5iR
+.sp 1v
+\fB\\$2	\\$3\\$1\fP
+..
+.       \" index section
+.de IS
+.ta 0.3i 1i 6.5iR
+.br
+\fR	\\$2	\\$3\\$1\fP
 ..
 .       \" initialization
-.nr SP 0
 .nr PI 5n
-.nr PD 1v
-.nr PS 10
-.nr VS 12
+.nr PS 12
+.nr VS 14
 .nr h0 -1
 .       \" page size (ISO B5)
 .\"if !\n(LL .nr LL 4.9i  \" line length
@@ -503,12 +514,10 @@
 .\"if !\n(MO .nr MO 1i    \" left margin for odd pages
 .\"if !\n(MT .nr MT 1i    \" top margin
 .\"if !\n(PH .nr PH 9.8i  \" page height
-.
 .       \" page size (ISO A4)
 .if !\n(LL .nr LL 16c   \" line length
-.if !\n(MB .nr MB 2.5c  \" bottom margin
+.if !\n(MB .nr MB 2c    \" bottom margin
 .if !\n(ME .nr ME 2.5c  \" left margin for even pages
 .if !\n(MO .nr MO 2.5c  \" left margin for odd pages
-.if !\n(MT .nr MT 2.5c  \" top margin
-.\"if !\n(PH .nr PH 27.7c \" page height
-\" there's no page width, it's not needed for troff
+.if !\n(MT .nr MT 2c    \" top margin
+.if !\n(PH .nr PH 29.7c \" page height

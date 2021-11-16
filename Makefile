@@ -1,24 +1,19 @@
-ROFFS = fqa0.roff \
-        fqa1.roff
+SRCS  = fqa0.txt fqa1.txt
+ROFFS = ${SRCS:.txt=.roff}
+HTMLS = ${SRCS:.txt=.html}
 
-HTMLS = fqa0.html \
-        fqa1.html
-
-.SUFFIXES: .txt .roff .html
+.SUFFIXES: .txt .roff .html .ps .pdf
 
 all: fqa.pdf ${HTMLS}
 
 fqa.pdf: fqa.ps
-	ps2pdf fqa.ps fqa.pdf
+	ps2pdf '-sPAPERSIZE=a4' fqa.ps fqa.pdf
 
-fqa.ps: mb.tmac fqa.roff index.roff
-	troff -mpictures mb.tmac fqa.roff index.roff ${ROFFS} 2>/dev/null | dpost >fqa.ps
+fqa.ps: mb.tmac title.roff index.roff
+	troff -mpictures mb.tmac title.roff index.roff ${ROFFS} 2>/dev/null | dpost >fqa.ps
 
-index.roff: index
-	grep '^index:' index | sed 's/index://' >index.roff
-
-index: ${ROFFS}
-	troff -mpictures mb.tmac ${ROFFS} 2>index >/dev/null
+index.roff: ${ROFFS}
+	troff -mpictures mb.tmac ${ROFFS} 2>&1 >/dev/null | grep '^index:' | sed 's/index://' >index.roff
 
 .txt.roff:
 	awk -f ./incipit $< >$@
@@ -27,6 +22,6 @@ index: ${ROFFS}
 	awk -f ./incipit -v 'type=html' $< >$@
 
 clean:
-	-rm fqa.pdf fqa.ps index index.roff ${ROFFS} ${HTMLS}
+	-rm fqa.pdf fqa.ps index.roff ${ROFFS} ${HTMLS}
 
 .PHONY: clean

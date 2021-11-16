@@ -49,11 +49,11 @@ IMAGE: {
 # On what systems does 9front run?
 
 9front runs on the following platforms:
-• 386
-• amd64
-• arm
-• arm64
-• mips
+- 386
+- amd64
+- arm
+- arm64
+- mips
 
 Read:
 [*FQA 3.2 - Selecting Hardware*](fqa3.html#3.2)
@@ -209,7 +209,6 @@ The following list is probably not exhaustive:
   device
 - [`derp(1)`](http://man.9front.org/1/derp) -- find changes between directories
 - [`dtracy(1)`](http://man.9front.org/1/dtracy) -- dynamic tracing language (like dtrace)
-
 - [`feminize(1)`](http://git.9front.org/plan9front/plan9front/HEAD/rc/bin/feminize/f.html)
   -- replace sexist remarks
 - [`fplot(1)`](http://man.9front.org/1/fplot)

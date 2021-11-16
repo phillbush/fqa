@@ -149,7 +149,7 @@
 .rm sH
 .nr mT 0
 .if \\n%>1       .bp
-.if \\n%>1 .if e .bp
+.if \\n%>1 .if e .bp +1
 .ie \\*(cH .nr % 1
 .nr nC 0 1
 .nr bY 0
@@ -167,7 +167,7 @@
 .vs \\n(VS+30p
 .ne 4
 .hy 0
-.ds cH "FQA \\n(h0. \\$1"
+.ds cH FQA \\n(h0. \\$1
 \XPDFMark: Bookmark 0 \\*(cHFQA \\n(h0
 .br
 \\$1

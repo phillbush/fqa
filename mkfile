@@ -15,10 +15,10 @@ fqa.pdf:D: fqa.ps
 	ps2pdf '-sPAPERSIZE=a4' fqa.ps fqa.pdf
 
 fqa.ps:D: title.roff index.roff
-	troff -mpictures mb.tmac title.roff index.roff $ROFFS >[2]/dev/null | dpost >fqa.ps
+	troff -mpictures mb.tmac fonts.roff title.roff index.roff $ROFFS >[2]/dev/null | dpost >fqa.ps
 
 index.roff:D: $ROFFS
-	troff -mpictures mb.tmac $ROFFS >[2=1] >/dev/null | grep '^index:' | sed 's/index://' >index.roff
+	troff -mpictures mb.tmac fonts.roff $ROFFS >[2=1] >/dev/null | grep '^index:' | sed 's/index://' >index.roff
 
 %.roff:D: %.txt
 	awk -f ./incipit $stem.txt >$target
